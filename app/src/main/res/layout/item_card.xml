@@ -20,12 +20,26 @@
 
         <TextView
             android:id="@+id/txtProductoCard"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/poppins"
             android:text="TextView"
             android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/imgEditar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/ic_editar" />
+
+        <ImageView
+            android:id="@+id/imgBorrar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/ic_borrar" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -30,30 +30,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         //1-Mandar a llamar a todos los elementos de la pantalla
-        val txtNombreUsuario = findViewById<EditText>(R.id.txtNombreProducto)
+        val txtNombreProducto = findViewById<EditText>(R.id.txtNombreProducto)
         val txtPrecio = findViewById<EditText>(R.id.txtPrecioProducto)
         val txtCantidad = findViewById<EditText>(R.id.txtCantidadProducto)
         val btnAgregar = findViewById<Button>(R.id.btnAgregar)
 
-        //2- Programar el boton
-        btnAgregar.setOnClickListener {
-            GlobalScope.launch(Dispatchers.IO){
-                //Guardar datos
-                //1-Crear objeto de la clase conexión
 
-                val claseConexion = ClaseConexion().cadenaConexion()
-
-                //2- Crear variable que contenga un PreparedStatement
-                val addProducto = claseConexion?.prepareStatement("insert into tbProductos(nombreProducto, precio, cantidad) values(?, ?, ?)")!!
-
-                addProducto.setString(1, txtNombreUsuario.text.toString())
-                addProducto.setInt(2, txtPrecio.text.toString().toInt())
-                addProducto.setInt( 3, txtCantidad.text.toString().toInt())
-                addProducto.executeUpdate()
+        fun limpiar(){
+            txtNombreProducto.setText("")
+            txtPrecio.setText("")
+            txtCantidad.setText("")
         }
 
-        }
-
+        ///////TODO: mostrar datos////////
         ////////////////////////////Mostrar//////////////////
         val rcvProductos = findViewById<RecyclerView>(R.id.rcvProductos)
 
@@ -85,6 +74,35 @@ class MainActivity : AppCompatActivity() {
                 rcvProductos.adapter = miAdapter
             }
         }
+
+        //////TODO: Guardar datos/////
+        //2- Programar el boton
+        btnAgregar.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO){
+                //Guardar datos
+                //1-Crear objeto de la clase conexión
+
+                val claseConexion = ClaseConexion().cadenaConexion()
+
+                //2- Crear variable que contenga un PreparedStatement
+                val addProducto = claseConexion?.prepareStatement("insert into tbProductos(nombreProducto, precio, cantidad) values(?, ?, ?)")!!
+
+                addProducto.setString(1, txtNombreProducto.text.toString())
+                addProducto.setInt(2, txtPrecio.text.toString().toInt())
+                addProducto.setInt( 3, txtCantidad.text.toString().toInt())
+                addProducto.executeUpdate()
+
+                val nuevosProductos = obtenerDatos()
+                withContext(Dispatchers.Main){
+                    (rcvProductos.adapter as? Adaptador)?.actualizarLista(nuevosProductos)
+                }
+
+        }
+
+            //limpiar()
+
+        }
+
 
     }
 }
