@@ -10,6 +10,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import modelo.ClaseConexion
 import modelo.dataClassProductos
+import java.util.UUID
 
 class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -46,6 +47,12 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
 
     }
 
+    fun actualizarProducto(nombreProducto: String, uuid: String){
+        //1-Creo una corrutina
+        GlobalScope.launch(Dispatchers.IO){
+
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vista =            LayoutInflater.from(parent.context).inflate(R.layout.item_card, parent, false)
         return ViewHolder(vista)
@@ -71,10 +78,10 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
 
                 //Le ponemos un titulo a la alerta
 
-                builder.setTitle("¿Esta seguro?")
+                builder.setTitle("¡Espera!")
 
                 //Ponemos el mensaje
-                builder.setMessage("¿Deseas elimar el registro?")
+                builder.setMessage("¿Estás seguro de que deseas elimar el registro?")
 
                 //Paso final, agregamos los botones
                 builder.setPositiveButton("Si"){
