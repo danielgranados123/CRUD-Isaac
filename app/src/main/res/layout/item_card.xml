@@ -32,14 +32,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
-            app:srcCompat="@drawable/ic_editar" />
+            app:srcCompat="@drawable/ic_edit" />
 
         <ImageView
             android:id="@+id/imgBorrar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
-            app:srcCompat="@drawable/ic_borrar" />
+            app:srcCompat="@drawable/ic_eliminar" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
