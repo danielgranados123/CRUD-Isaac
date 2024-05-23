@@ -3,6 +3,7 @@ package RecyclerViewHelper
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import daniel.granados.crudisaac2a.R
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +51,17 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
     fun actualizarProducto(nombreProducto: String, uuid: String){
         //1-Creo una corrutina
         GlobalScope.launch(Dispatchers.IO){
+            //1- Crear objeto de la clase conexión
+            val objConexion = ClaseConexion().cadenaConexion()
 
+            //2- Variable que contenga un prepareStatement
+            val updateProducto = objConexion?.prepareStatement("update tbProductos set nombreProducto = ? where uuid = ?")!!
+            updateProducto.setString(1, nombreProducto)
+            updateProducto.setString(2, uuid)
+            updateProducto.executeUpdate()
+
+            val commit = objConexion.prepareStatement("commit")!!
+            commit.executeUpdate()
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -91,6 +102,35 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
 
                 builder.setNegativeButton("No"){
                     dialog, wich ->
+                }
+
+                val alertDialog = builder.create()
+                alertDialog.show()
+            }
+
+            holder.imgEditar.setOnClickListener {
+
+                val context = holder.itemView.context
+
+                //Crear alerta
+
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Editar nombre de producto:")
+
+                //Agregamos cuadro de texto para que el usuario escriba el nuevo nombre
+                val cuadritoNuevoNombre = EditText(context)
+                cuadritoNuevoNombre.setHint(item.nombreProducto)
+                builder.setView(cuadritoNuevoNombre)
+
+                //Paso final, agregamos los botones
+                builder.setPositiveButton("Actualizar"){
+                        dialog, wich ->
+                    actualizarProducto(cuadritoNuevoNombre.text.toString(), item.uuid)
+                }
+
+                builder.setNegativeButton("Cancelar"){
+                        dialog, wich ->
+                    dialog.dismiss()
                 }
 
                 val alertDialog = builder.create()
