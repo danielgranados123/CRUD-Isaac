@@ -7,6 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/lbProductos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="PRODUCTOS"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093" />
+
     <EditText
         android:id="@+id/txtCantidadProducto"
         android:layout_width="wrap_content"
@@ -18,40 +32,9 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPrecioProducto"
-        app:layout_constraintVertical_bias="0.491" />
-
-    <TextView
-        android:id="@+id/lbProductos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="PRODUCTOS"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
-
-    <EditText
-        android:id="@+id/txtNombreProducto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/poppins"
-        android:hint="Nombre del Producto"
-        android:inputType="text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbProductos"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.483" />
 
     <EditText
         android:id="@+id/txtPrecioProducto"
@@ -64,23 +47,38 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNombreProducto"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.205" />
 
     <Button
         android:id="@+id/btnAgregar"
-        android:layout_width="293dp"
+        android:layout_width="302dp"
         android:layout_height="54dp"
         android:fontFamily="@font/poppins_bold"
         android:text="AGREGAR"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.533" />
+
+    <EditText
+        android:id="@+id/txtNombreProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/poppins"
+        android:hint="Nombre del Producto"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAgregar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbProductos"
+        app:layout_constraintVertical_bias="0.129" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvProductos"

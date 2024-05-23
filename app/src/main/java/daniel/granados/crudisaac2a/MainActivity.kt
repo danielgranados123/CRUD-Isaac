@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import modelo.dataClassProductos
+import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,8 +60,11 @@ class MainActivity : AppCompatActivity() {
 
             val productos = mutableListOf<dataClassProductos>()
             while (resultset.next()){
+                val uuid = resultset.getString("uuid")
+                val precio = resultset.getInt("precio")
+                val cantidad = resultset.getInt("cantidad")
                 val nombre = resultset.getString("nombreProducto")
-                val producto = dataClassProductos(nombre)
+                val producto = dataClassProductos(uuid, nombre, precio, cantidad)
                 productos.add(producto)
             }
             return productos
@@ -85,11 +89,12 @@ class MainActivity : AppCompatActivity() {
                 val claseConexion = ClaseConexion().cadenaConexion()
 
                 //2- Crear variable que contenga un PreparedStatement
-                val addProducto = claseConexion?.prepareStatement("insert into tbProductos(nombreProducto, precio, cantidad) values(?, ?, ?)")!!
+                val addProducto = claseConexion?.prepareStatement("insert into tbProductos(uuid, nombreProducto, precio, cantidad) values(?, ?, ?, ?)")!!
 
-                addProducto.setString(1, txtNombreProducto.text.toString())
-                addProducto.setInt(2, txtPrecio.text.toString().toInt())
-                addProducto.setInt( 3, txtCantidad.text.toString().toInt())
+                addProducto.setString(1, UUID.randomUUID().toString())
+                addProducto.setString(2, txtNombreProducto.text.toString())
+                addProducto.setInt(3, txtPrecio.text.toString().toInt())
+                addProducto.setInt( 4, txtCantidad.text.toString().toInt())
                 addProducto.executeUpdate()
 
                 val nuevosProductos = obtenerDatos()
