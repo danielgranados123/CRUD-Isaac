@@ -9,6 +9,7 @@ import daniel.granados.crudisaac2a.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import modelo.dataClassProductos
 import java.util.UUID
@@ -48,6 +49,12 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
 
     }
 
+    fun ActualizarListaDespuesDeActualizarDatos (uuid: String, nuevoNombre: String){
+        val index = Datos.indexOfFirst { it.uuid == uuid }
+        Datos[index].nombreProducto = nuevoNombre
+        notifyItemChanged(index)
+    }
+
     fun actualizarProducto(nombreProducto: String, uuid: String){
         //1-Creo una corrutina
         GlobalScope.launch(Dispatchers.IO){
@@ -62,8 +69,14 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
 
             val commit = objConexion.prepareStatement("commit")!!
             commit.executeUpdate()
+
+            withContext(Dispatchers.Main){
+                ActualizarListaDespuesDeActualizarDatos(uuid, nombreProducto)
+            }
         }
     }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vista =            LayoutInflater.from(parent.context).inflate(R.layout.item_card, parent, false)
         return ViewHolder(vista)
@@ -138,6 +151,10 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
             }
         }
 
+        //Darle clic a la card
+        holder.itemView.setOnClickListener {
+
+        }
 
     }
 }

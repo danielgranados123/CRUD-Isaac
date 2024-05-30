@@ -3,8 +3,7 @@ package modelo
 data class dataClassProductos(
 
     val uuid: String,
-    val nombreProducto: String,
-    val precio: Int,
-    val cantidad: Int
-
+    var nombreProducto: String,
+    var precio: Int,
+    var cantidad: Int
 )
