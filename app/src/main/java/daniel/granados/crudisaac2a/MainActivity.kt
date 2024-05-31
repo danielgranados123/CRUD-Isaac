@@ -98,8 +98,12 @@ class MainActivity : AppCompatActivity() {
                 addProducto.executeUpdate()
 
                 val nuevosProductos = obtenerDatos()
+                //creo una corrutina que actualice el listado
+
                 withContext(Dispatchers.Main){
                     (rcvProductos.adapter as? Adaptador)?.actualizarLista(nuevosProductos)
+
+
                 }
 
         }

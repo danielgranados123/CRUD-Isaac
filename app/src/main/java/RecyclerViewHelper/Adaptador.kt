@@ -1,11 +1,13 @@
 package RecyclerViewHelper
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import daniel.granados.crudisaac2a.R
+import daniel.granados.crudisaac2a.activity_detalle_productos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -153,6 +155,23 @@ class Adaptador(private var Datos: List<dataClassProductos>) : RecyclerView.Adap
 
         //Darle clic a la card
         holder.itemView.setOnClickListener {
+            //Invoco el contexto
+            val context = holder.itemView.context
+
+            //Cambiamos la pantalla
+            //Abrimos la pantalla de productos
+
+            val pantallaDetalles = Intent(context, activity_detalle_productos::class.java)
+
+            //Aqui, antes de abrir la nueva pantalla le mando los parametros
+            pantallaDetalles.putExtra("uuid", item.uuid)
+            pantallaDetalles.putExtra("nombre", item.nombreProducto)
+            pantallaDetalles.putExtra("precio", item.precio)
+            pantallaDetalles.putExtra("cantidad", item.cantidad)
+
+
+            context.startActivity(pantallaDetalles)
+
 
         }
 
